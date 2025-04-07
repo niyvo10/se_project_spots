@@ -34,41 +34,39 @@
           </button>
         </section>
         <section class="cards page__section">
-          <ul class="cards__list">
-            <template id="card-template">
-              <li class="card">
-                <img src="" alt="" class="card__image" />
-                <div class="card__content">
-                  <h2 class="card__title"></h2>
-                  <button type="button" class="card__like-btn"></button>
-                </div>
-              </li>
-            </template>
-          </ul>
+          <ul class="cards__list"></ul>
+
+          <template id="card-template">
+            <li class="card">
+              <img src="" alt="" class="card__image" />
+              <div class="card__content">
+                <h2 class="card__title"></h2>
+                <button type="button" class="card__like-btn"></button>
+              </div>
+            </li>
+          </template>
         </section>
       </main>
       <footer class="footer">
         <p class="footer__logo">2025 Spots</p>
       </footer>
-      <div class="modal" id="editProfileModal">
+      <div class="modal">
         <div class="modal__content">
-          <button class="modal__close-btn" id="closeModalBtn">&times;</button>
+          <button class="modal__close-btn">&times;</button>
           <h2 class="modal__title">Edit Profile</h2>
           <form class="modal__form">
-            <label for="name" class="modal__label">Name</label>
+            <label class="modal__label">Name</label>
             <input
               type="text"
-              id="name"
-              class="modal__input"
+              class="modal__input modal__input_type_name"
               placeholder="Name"
               required
             />
 
-            <label for="description" class="modal__label">Description</label>
+            <label class="modal__label">Description</label>
             <input
               type="text"
-              id="description"
-              class="modal__input"
+              class="modal__input modal__input_type_description"
               placeholder="Description"
               required
             />
@@ -77,15 +75,6 @@
           </form>
         </div>
       </div>
-      <template id="card-template">
-        <li class="card">
-          <img src="" alt="" class="card__image" />
-          <div class="card__content">
-            <h2 class="card__title"></h2>
-            <button type="button" class="card__like-btn"></button>
-          </div>
-        </li>
-      </template>
     </div>
     <script src="./scripts/index.js" defer></script>
   </body>
