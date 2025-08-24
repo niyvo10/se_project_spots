@@ -7,7 +7,7 @@
       name="description"
       content="Spots is a platform to share and discover unique places and experiences."
     />
-    <meta name="author" content="Niyvn Campbell" />
+    <meta name="author" content=" Niyvn Campbell " />
     <meta
       name="keywords"
       content="Spots, Places, Travel, Adventure, Social, Community, HTML, CSS"
@@ -64,13 +64,14 @@
       <footer class="footer">
         <p class="footer__logo">2025 Spots</p>
       </footer>
-      <div class="modal">
+
+      <div class="modal" id="profile-modal">
         <div class="modal__content">
           <button class="modal__close-btn" type="button">
             <img src="./images/closeicon.svg" alt="Close button" />
           </button>
           <h2 class="modal__title">Edit Profile</h2>
-          <form class="modal__form" id="edit-profile-form" name="edit-profile">
+          <form class="modal__form" id="edit-profile-form" name="profile-form">
             <label class="modal__label" for="profile-name">Name</label>
             <input
               id="profile-name"
@@ -103,6 +104,7 @@
           </form>
         </div>
       </div>
+
       <div class="modal modal--type-preview" id="preview-modal">
         <div class="modal__preview-content">
           <button
@@ -122,13 +124,14 @@
           <p class="modal__caption"></p>
         </div>
       </div>
+
       <div class="modal modal_type_add-card" id="new-post-modal">
         <div class="modal__content">
           <button class="modal__close-btn" type="button">
             <img src="./images/closeicon.svg" alt="Close button" />
           </button>
           <h2 class="modal__title">New Place</h2>
-          <form class="modal__form" id="new-post-form" name="new-post">
+          <form class="modal__form" id="new-post-form" name="new-post-form">
             <label class="modal__label" for="post-title">Title</label>
             <input
               type="text"
@@ -158,7 +161,7 @@
         </div>
       </div>
     </div>
-    <script src="./scripts/index.js" defer></script>
     <script src="./scripts/validation.js" defer></script>
+    <script src="./scripts/index.js" defer></script>
   </body>
 </html>

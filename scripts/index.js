@@ -1,18 +1,37 @@
 document.addEventListener("DOMContentLoaded", () => {
   const initialCards = [
-    { name: "Val Thorens", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg" },
-    { name: "Restaurant terrace", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/2-photo-by-ceiline-from-pexels.jpg" },
-    { name: "An outdoor cafe", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/3-photo-by-tubanur-dogan-from-pexels.jpg" },
-    { name: "A very long bridge, over the forest and through the trees", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/4-photo-by-maurice-laschet-from-pexels.jpg" },
-    { name: "Tunnel with morning light", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/5-photo-by-van-anh-nguyen-from-pexels.jpg" },
-    { name: "Mountain house", link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg" },
+    {
+      name: "Val Thorens",
+      link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/1-photo-by-moritz-feldmann-from-pexels.jpg",
+    },
+    {
+      name: "Restaurant terrace",
+      link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/2-photo-by-ceiline-from-pexels.jpg",
+    },
+    {
+      name: "An outdoor cafe",
+      link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/3-photo-by-tubanur-dogan-from-pexels.jpg",
+    },
+    {
+      name: "A very long bridge, over the forest and through the trees",
+      link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/4-photo-by-maurice-laschet-from-pexels.jpg",
+    },
+    {
+      name: "Tunnel with morning light",
+      link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/5-photo-by-van-anh-nguyen-from-pexels.jpg",
+    },
+    {
+      name: "Mountain house",
+      link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/spots/6-photo-by-moritz-feldmann-from-pexels.jpg",
+    },
   ];
 
-  const profileEditBtn = document.querySelector(".profile__edit-btn");
-  const modal = document.querySelector(".modal");
-  const profileForm = document.querySelector(".modal__form");
-  const nameInput = document.querySelector(".modal__input_type_name");
-  const descriptionInput = document.querySelector(".modal__input_type_description");
+  const profileModal = document.querySelector("#profile-modal");
+  const profileForm = document.forms["profile-form"];
+  const nameInput = profileForm.querySelector(".modal__input_type_name");
+  const descriptionInput = profileForm.querySelector(
+    ".modal__input_type_description"
+  );
   const profileName = document.querySelector(".profile__name");
   const profileDescription = document.querySelector(".profile__description");
 
@@ -21,11 +40,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const previewCaption = previewModal.querySelector(".modal__caption");
 
   const newPostModal = document.querySelector("#new-post-modal");
-  const cardContainer = document.querySelector(".cards__list");
-  const cardTemplate = document.querySelector("#card-template").content;
-  const newPostForm = document.querySelector("#new-post-form");
+  const newPostForm = document.forms["new-post-form"];
   const titleInput = newPostForm.querySelector("#post-title");
   const linkInput = newPostForm.querySelector("#post-link");
+
+  const cardContainer = document.querySelector(".cards__list");
+  const cardTemplate = document.querySelector("#card-template").content;
+
+  const profileEditBtn = document.querySelector(".profile__edit-btn");
   const newPostButton = document.querySelector(".profile__add-btn");
 
   function openModal(modal) {
@@ -48,10 +70,10 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function openProfileModal() {
-    resetValidation(profileForm);
+    resetValidation(profileForm, validationConfig);
     nameInput.value = profileName.textContent;
     descriptionInput.value = profileDescription.textContent;
-    openModal(modal);
+    openModal(profileModal);
   }
 
   function getCardElement(data) {
@@ -85,16 +107,16 @@ document.addEventListener("DOMContentLoaded", () => {
     return cardElement;
   }
 
-  initialCards.forEach((cardData) => {
-    const card = getCardElement(cardData);
-    cardContainer.prepend(card);
-  });
+  function renderCard(data, method = "prepend") {
+    const card = getCardElement(data);
+    cardContainer[method](card);
+  }
 
+  initialCards.forEach((cardData) => renderCard(cardData));
 
   profileEditBtn.addEventListener("click", openProfileModal);
 
   newPostButton.addEventListener("click", () => {
-    resetFormState(newPostForm, validationConfig);
     openModal(newPostModal);
   });
 
@@ -104,8 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
       name: titleInput.value,
       link: linkInput.value,
     };
-    const newCard = getCardElement(newCardData);
-    cardContainer.prepend(newCard);
+    renderCard(newCardData);
     closeModal(newPostModal);
     resetFormState(newPostForm, validationConfig);
   });
@@ -114,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
     profileName.textContent = nameInput.value;
     profileDescription.textContent = descriptionInput.value;
-    closeModal(modal);
+    closeModal(profileModal);
   });
 
   document.querySelectorAll(".modal").forEach((modal) => {
@@ -135,30 +156,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
   enableValidation(validationConfig);
 });
-
-const validationConfig = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__submit-btn",
-  inactiveButtonClass: "modal__submit-btn_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
-
-
-function resetFormState(formElement, config) {
-  const inputList = Array.from(
-    formElement.querySelectorAll(config.inputSelector)
-  );
-  const buttonElement = formElement.querySelector(config.submitButtonSelector);
-  inputList.forEach((input) => hideInputError(formElement, input, config));
-  formElement.reset();
-  toggleButtonState(inputList, buttonElement, config);
-}
-
-function resetValidation(form) {
-  const inputs = form.querySelectorAll(".modal__input");
-  inputs.forEach((input) => {
-    hideInputError(form, input, validationConfig);
-  });
-}
