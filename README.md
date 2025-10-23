@@ -18,7 +18,7 @@ This webpage is deployed to GitHub Pages
 
 Deployment Link:
 
-https://niyvo10.github.io/se_project_spots/
+https://github.com/niyvo10/se_project_spots
 
 Videos links for project:
 
@@ -37,3 +37,4 @@ https://drive.google.com/file/d/12QT2OVAb9fzoa-gtMDpbcxpQYOX6cFG-/view?usp=shari
 https://drive.google.com/file/d/1h6O22ewhl-S8PwT3dNSTGr5LVdtdEv8n/view?usp=sharing
 
 https://drive.google.com/file/d/1xnJir8eliMx675vPNxBRfsQG6Tosh-Ej/view?usp=sharing
+# git-checkout--b-spots-final
